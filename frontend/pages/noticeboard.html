@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=toggle_off" />
+    <title>Club Notices - Student Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== SAME NAVBAR AS HOMEPAGE ===== */
+
+.navbar {
+    width: 100%;
+    height: 75px;
+    background: linear-gradient(90deg, #071129, #08142f);
+    display: flex;
+    align-items: center;
+    padding: 0 38px;
+    gap: 40px;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    transition: 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar a:hover {
+    color: #4dabf7;
+}
+
+        :root {
+            --bg-color: #ffffff;
+            --bg-border: #e1e5e9;
+            --text-color: #1a1a1a;
+            --text-secondary: #6b7280;
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --bg-border: #334155;
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--bg-border);
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left h1 {
+            font-family: 'Mozilla Headline', sans-serif;
+            font-weight: 600;
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Club Filter */
+        .club-filter {
+            padding: 24px;
+            border-bottom: 1px solid var(--bg-border);
+            background: var(--bg-color);
+        }
+
+        .club-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 8px 0;
+        }
+
+        .club-tab {
+            padding: 12px 20px;
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .club-tab.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .club-tab:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        /* Notices Container */
+        .notices-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-family: 'Mozilla Headline', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        /* Notice Cards */
+        .notices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .notice-card {
+            background: var(--bg-color);
+            border: 1px solid var(--bg-border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notice-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--primary-color);
+        }
+
+        .notice-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .club-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .hacker {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .chess {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .robotics {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .creative {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .culture {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .notice-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: var(--text-color);
+        }
+
+        .notice-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .notice-content {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .notice-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid var(--bg-border);
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn.primary {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 12px 16px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .notices-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .notices-container {
+                padding: 16px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+        }
+
+        /* Theme Toggle */
+        #theme-toggle {
+            background: var(--text-secondary);
+            color: white;
+        }
+
+        #theme-toggle:hover {
+            background: var(--text-color);
+        }
+    </style>
+    <script src="http://localhost:4600/socket.io/socket.io.js"></script>">
+</head>
+
+<body>
+
+    <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/chatroom">Chatroom</a>
+    <a href="/noticeboard">Notice Board</a>
+</nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1>📢 Club Notices</h1>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button class="submit-btn" id="theme-toggle">🌙 Dark</button>
+            <button class="submit-btn">🔄 Refresh</button>
+        </div>
+    </header>
+
+    <!-- Club Filter -->
+    <div class="club-filter">
+        <div class="club-tabs" id="clubTabs">
+            <div class="club-tab active" data-club="all">All Clubs</div>
+            <div class="club-tab" data-club="hacker">🤖 Hacker Club</div>
+            <div class="club-tab" data-club="chess">♟️ Chess Club</div>
+            <div class="club-tab" data-club="robotics">🚀 Robotics</div>
+            <div class="club-tab" data-club="creative">🎨 Creative</div>
+            <div class="club-tab" data-club="culture">🌟 Culture Club</div>
+        </div>
+    </div>
+
+    <!-- Notices Container -->
+    <div class="notices-container">
+        <div class="section-header">
+            <h2 class="section-title">Latest Notices</h2>
+            <div style="display: flex; gap: 12px;">
+                <span
+                    style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-secondary);">
+                    📅 <span id="noticeCount">12</span> notices
+                </span>
+            </div>
+        </div>
+
+        <div class="notices-grid" id="noticesGrid">
+            <!-- Notices will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Sample notice data
+        let noticesData = [];
+        let socket = null;
+
+        // Initialize Socket.IO connection
+        function initializeSocket() {
+            socket = io('http://localhost:4600');
+            
+            socket.on('connect', () => {
+                console.log('Connected to real-time updates ✅');
+            });
+
+            // Listen for notice updates/deletes - refresh the list
+            socket.on('noticeUpdated', () => {
+                console.log('Notice data updated, refreshing...');
+                fetchNotices();
+            });
+
+            socket.on('disconnect', () => {
+                console.log('Disconnected from real-time updates');
+            });
+        }
+
+        async function fetchNotices() {
+            try {
+                const res = await fetch('http://localhost:4600/api/notices');
+                if (!res.ok) throw new Error('Failed to fetch');
+                noticesData = await res.json();
+                renderNotices(currentClubFilter);
+            } catch (err) {
+                console.error("Error fetching notices:", err);
+                noticesGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">⚠️</div>
+                        <h3>Unable to Load Notices</h3>
+                        <p>Make sure Routing.js is running on port 4600</p>
+                    </div>
+                `;
+            }
+        }
+        // DOM Elements
+        const clubTabs = document.getElementById('clubTabs');
+        const noticesGrid = document.getElementById('noticesGrid');
+        const noticeCount = document.getElementById('noticeCount');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Initialize
+        let currentClubFilter = 'all';
+
+        // Render notices
+        function renderNotices(clubFilter = 'all') {
+            const filteredNotices = clubFilter === 'all'
+                ? noticesData
+                : noticesData.filter(notice => notice.club === clubFilter);
+
+            noticeCount.textContent = filteredNotices.length;
+
+            if (filteredNotices.length === 0) {
+                noticesGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <h3>No notices found</h3>
+                        <p>No notices available for this club at the moment.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            noticesGrid.innerHTML = filteredNotices.map(notice => {
+                const createdDate = new Date(notice.createdAt);
+                const date = createdDate.toLocaleDateString();
+                const time = createdDate.toLocaleTimeString();
+                
+                return `
+                <div class="notice-card" data-club="${notice.club}">
+                    <div class="notice-badge">${(notice.status || 'NOTICE').toUpperCase()}</div>
+                    <div class="club-icon ${notice.club}">
+                        ${getClubEmoji(notice.club)}
+                    </div>
+                    <h3 class="notice-title">${notice.title}</h3>
+                    <div class="notice-meta">
+                        <span>📅 ${date}</span>
+                        <span>🕒 ${time}</span>
+                    </div>
+                    <div class="notice-content">${notice.content}</div>
+                    <div class="notice-actions">
+                        <button class="action-btn primary">
+                            📋 View Details
+                        </button>
+                        <button class="action-btn">
+                            ⭐ Save
+                        </button>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // Get club emoji
+        function getClubEmoji(club) {
+            const emojis = {
+                hacker: '💻',
+                chess: '♟️',
+                robotics: '🤖',
+                creative: '🎨',
+                culture: '🎭'
+            };
+            return emojis[club] || '📢';
+        }
+
+        // Club filter event listeners
+        clubTabs.addEventListener('click', (e) => {
+            const tab = e.target.closest('.club-tab');
+            if (!tab) return;
+
+            // Update active tab
+            document.querySelectorAll('.club-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            currentClubFilter = tab.dataset.club;
+            renderNotices(currentClubFilter);
+        });
+
+        // Theme toggle
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+            themeToggle.className = 'submit-btn';
+        });
+
+        // Action button handlers
+        noticesGrid.addEventListener('click', (e) => {
+            if (e.target.closest('.action-btn.primary')) {
+                alert('Opening notice details...');
+            } else if (e.target.closest('.action-btn:not(.primary)')) {
+                alert('Notice saved to favorites!');
+            }
+        });
+
+        document.querySelector('.submit-btn:nth-child(2)')
+            .addEventListener('click', fetchNotices);
+
+        // Initialize Socket.IO and fetch initial data
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeSocket();
+            fetchNotices();
+        });
+    </script>
+<!-- CHATBOT -->
+
+<div id="chatbot-root"></div>
+
+<script>
+
+fetch('/components/chatbot-widget.html')
+
+.then(response => response.text())
+
+.then(data => {
+
+    document.getElementById(
+        'chatbot-root'
+    ).innerHTML = data;
+
+    // LOAD CSS
+
+    const css =
+        document.createElement('link');
+
+    css.rel = 'stylesheet';
+
+    css.href =
+        '/css/chatbot-widget.css';
+
+    document.head.appendChild(css);
+
+    // LOAD JS
+
+    const script =
+        document.createElement('script');
+
+    script.src =
+        '/js/chatbot-widget.js';
+
+    document.body.appendChild(script);
+
+})
+
+.catch(error => {
+
+    console.log(
+        'Chatbot Load Error:',
+        error
+    );
+
+});
+
+</script>
+    
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+.ai-chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+#aiToggleBtn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: #5865f2;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#aiChatWindow {
+    width: 320px;
+    height: 450px;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.ai-header {
+    background: #5865f2;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+#aiMessages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f5f5f5;
+}
+
+.ai-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+#aiInput {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    outline: none;
+}
+
+#aiSendBtn {
+    border: none;
+    background: #5865f2;
+    color: white;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.ai-user {
+    background: #5865f2;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.ai-bot {
+    background: #e4e6eb;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
