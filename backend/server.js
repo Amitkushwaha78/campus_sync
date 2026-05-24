@@ -84,7 +84,7 @@ app.get('/', (req, res) => {
     res.sendFile(
         join(
             __dirname,
-            '../frontend/pages/index.html'
+            '../frontend/pages/magazine.html'
         )
     );
 
@@ -120,14 +120,33 @@ app.get('/noticeboard', (req, res) => {
 
 app.get('/admin', (req, res) => {
 
-    res.sendFile(
-        join(
-            __dirname,
-            '../frontend/pages/admin.html'
-        )
-    );
+    const key = req.query.key;
+
+    if(key === 'SRIT123'){
+
+        res.sendFile(
+            join(
+                __dirname,
+                '../frontend/pages/admin.html'
+            )
+        );
+
+    }else{
+
+        res.send(`
+            <h1>
+                Access Denied
+            </h1>
+
+            <p>
+                Invalid Admin Key
+            </p>
+        `);
+
+    }
 
 });
+
 
 // CHATBOT PAGE
 
@@ -141,6 +160,25 @@ app.get('/chatbot', (req, res) => {
     );
 
 });
+
+
+  //  magzine page
+app.get('/magazine', (req, res) => {
+    res.sendFile(
+        join(__dirname,
+        '../frontend/pages/magazine.html')
+    );
+});
+
+// HOME PAGE
+app.get('/index.html', (req, res) => {
+    res.sendFile(
+        join(__dirname,
+        '../frontend/pages/index.html')
+    );
+});
+
+
 
 // ===============================
 // NOTICE APIs
@@ -362,19 +400,112 @@ io.on('connection', (socket) => {
     // CHAT MESSAGE
     // ===========================
 
-    socket.on('chat', (message) => {
+    socket.on('chat', async (message) => {
 
-        console.log(
-            `${message.username}: ${message.text}`
-        );
+    console.log(
+        `${message.username}: ${message.text}`
+    );
 
-        io.to(ROOM).emit(
-            'chat',
-            message
-        );
+    // SEND USER MESSAGE
+    io.to(ROOM).emit(
+        'chat',
+        message
+    );
 
-    });
+    // ===========================
+    // @SRITAI FEATURE
+    // ===========================
 
+    if (
+        message.text
+            .toLowerCase()
+            .includes('@sritai')
+    ) {
+
+        try {
+
+            // REMOVE @sritai
+            const userQuestion =
+                message.text
+                    .replace(/@sritai/gi, '')
+                    .trim();
+
+            // CALL AI
+            const completion =
+                await client.chat.completions.create({
+
+                    model: 'llama-3.1-8b-instant',
+
+                    messages: [
+
+                        {
+                            role: 'system',
+
+                            content: `
+You are SRIT AI.
+
+You help students regarding:
+- hacker club
+- robotics
+- chess club
+- notices
+- events
+- registrations
+- chatroom
+
+Rules:
+- Keep replies short
+- Friendly tone
+- Helpful answers
+`
+                        },
+
+                        {
+                            role: 'user',
+
+                            content: userQuestion
+                        }
+
+                    ]
+
+                });
+
+            const aiReply =
+                completion.choices[0]
+                    .message.content;
+
+            // SEND AI MESSAGE
+            io.to(ROOM).emit('chat', {
+
+                username: 'SRIT AI',
+
+                text: aiReply,
+
+                isBot: true
+
+            });
+
+        } catch (error) {
+
+            console.log(
+                'AI Mention Error:',
+                error.message
+            );
+
+            io.to(ROOM).emit('chat', {
+
+                username: 'SRIT AI',
+
+                text:
+                    'Sorry, AI is currently unavailable.'
+
+            });
+
+        }
+
+    }
+
+});
     // ===========================
     // POST NOTICE TO CHATROOM
     // ===========================

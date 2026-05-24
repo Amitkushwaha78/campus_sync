@@ -1,0 +1,7 @@
+express
+socket.io
+cors
+dotenv
+axios
+openai
+nodemon

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Assistant</title>
+
+</head>
+<style>body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f4f4;
+}
+
+.navbar{
+    background:#071129;
+    padding:25px 40px;
+    display:flex;
+    gap:40px;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.chat-container{
+    width:80%;
+    margin:40px auto;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.chat-header{
+    background:#007bff;
+    color:white;
+    padding:20px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.chat-box{
+    height: 300px;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.chat-input-area{
+    display:flex;
+    padding:20px;
+    border-top:1px solid #ddd;
+}
+
+.chat-input-area input{
+    flex:1;
+    padding:15px;
+    font-size:16px;
+}
+
+.chat-input-area button{
+    padding:15px 25px;
+    background:#007bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+}</style>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/chatroom">Chatroom</a>
+        <a href="/noticeboard">Notice Board</a>
+        <a href="/chatbot">AI Assistant</a>
+    </nav>
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+            🤖 Club AI Assistant
+        </div>
+
+        <div class="chat-box" id="chatBox">
+
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="userInput"
+                placeholder="Ask something...">
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+        </div>
+
+    </div>
+
+    <script src="../js/chatbot.js"></script>
+
+</body>
+</html>
