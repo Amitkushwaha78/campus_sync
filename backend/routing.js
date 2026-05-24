@@ -53,6 +53,12 @@ app.delete('/api/notices/:id', async (req, res) => {
 });
 
 /* 🚀 SERVER */
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:4600");
+const PORT = process.env.PORT || 4600;
+
+server.listen(PORT, () => {
+
+    console.log(
+        `Server running on port ${PORT}`
+    );
+
 });

@@ -63,7 +63,7 @@ async function sendMessage() {
 
         const response =
             await fetch(
-                "http://localhost:4600/api/chatbot",
+                "/api/chatbot",
                 {
                     method: "POST",
 

@@ -470,7 +470,7 @@
 
         // Initialize Socket.IO connection
         function initializeSocket() {
-            socket = io('http://localhost:4600');
+            socket = io();
             socket.on('connect', () => {
                 console.log('Connected to Socket.IO server ✅');
             });
@@ -503,7 +503,7 @@
         // Fetch notices from backend API
         async function fetchNoticesFromBackend() {
             try {
-                const res = await fetch('http://localhost:4600/api/notices');
+                const res = await fetch('/api/notices');
                 if (!res.ok) throw new Error('Failed to fetch notices');
                 notices = await res.json();
                 loadNotices();
@@ -522,7 +522,7 @@
             }
 
             try {
-                const res = await fetch(`http://localhost:4600/api/notices/${noticeId}`, {
+                const res = await fetch(`/api/notices/${noticeId}`, {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' }
                 });
@@ -578,7 +578,7 @@
             };
 
             try {
-                const res = await fetch('http://localhost:4600/api/notices', {
+                const res = await fetch('/api/notices', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)

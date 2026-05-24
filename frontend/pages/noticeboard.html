@@ -336,7 +336,7 @@
             background: var(--text-color);
         }
     </style>
-    <script src="http://localhost:4600/socket.io/socket.io.js"></script>">
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
@@ -395,7 +395,7 @@
 
         // Initialize Socket.IO connection
         function initializeSocket() {
-            socket = io('http://localhost:4600');
+            socket = io();
             
             socket.on('connect', () => {
                 console.log('Connected to real-time updates ✅');
@@ -414,7 +414,7 @@
 
         async function fetchNotices() {
             try {
-                const res = await fetch('http://localhost:4600/api/notices');
+                const res = await fetch('/api/notices');
                 if (!res.ok) throw new Error('Failed to fetch');
                 noticesData = await res.json();
                 renderNotices(currentClubFilter);
