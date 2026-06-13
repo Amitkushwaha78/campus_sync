@@ -1,22 +1,84 @@
-# Club App (Demo)
+# 🚀 Club Community Portal
 
-This is a small demo showing user registration with OTP mobile verification, login with JWT, and a static frontend.
+A modern college club management platform built using **Node.js, Express.js, Socket.IO, and AI Chatbot integration**.
 
-Quick start
+This project helps students:
+- Join club communities
+- Chat in real-time
+- Receive notices instantly
+- Interact with an AI assistant
+- Stay updated about events and registrations
 
-1. Copy `.env.example` to `.env` and adjust `MONGO_URI` and `JWT_SECRET`.
-2. Install dependencies:
+---
 
-   npm install
+# ✨ Features
 
-3. Start the server:
+## 🏠 Homepage
+- Modern responsive UI
+- Smooth navigation
+- Dark/Light mode support
 
-   npm run start
+## 💬 Real-Time Chatroom
+- Live messaging with Socket.IO
+- Online users tracking
+- Group chat support
+- Real-time updates
 
-The server serves the static files in the project root. Open `http://localhost:4000/testing.html` to use the demo UI.
+## 📢 Notice Board
+- Club-wise notice filtering
+- Dynamic notices
+- Live notice updates
+- Admin broadcasting system
 
-Notes
+## 🤖 AI Chatbot
+- Floating Meta AI style chatbot
+- Answers student queries
+- Helps regarding:
+  - Events
+  - Clubs
+  - Notices
+  - Registrations
+  - Chatroom
 
-- OTPs are printed to the server console in this demo. To send real SMS, integrate an SMS provider (Twilio, etc.) where the server logs the OTP.
-- Passwords are stored hashed using bcrypt.
-- This is a demo and should not be used in production without further hardening (rate limiting, secure cookie handling, TLS, input validation, etc.).
+## 👨‍💻 Admin Panel
+- Add notices
+- Manage announcements
+- Broadcast notices to chatroom
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+- HTML
+- CSS
+- JavaScript
+
+## Backend
+- Node.js
+- Express.js
+- Socket.IO
+
+## AI Integration
+- Gemini API
+- Groq API
+
+---
+
+# 📂 Folder Structure
+
+```bash
+club/
+│
+├── backend/
+│   └── server.js
+│
+├── frontend/
+│   ├── css/
+│   ├── js/
+│   ├── components/
+│   └── pages/
+│
+├── .env
+├── package.json
+└── README.md
